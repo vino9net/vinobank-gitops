@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-banking-sim-j
+spec:
+  selector:
+    matchLabels:
+      app: core-banking-sim-j
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: core-banking-sim-j
+    spec:
+      containers:
+      - name: core-banking-sim-j
+        image: ghcr.io/vino9org/core-banking-sim-j:develop-20230602-232444-c9f6e45 # {"$imagepolicy": "vinobank:core-banking-sim-j-develop"}
+        ports:
+        - containerPort: 8080
+        env:
+        - name: QUARKUS_LOG_LEVEL
+          value: WARN
+        - name: NEW_RELIC_APP_NAME
+          value: vinobank/corebanking-sim-j
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: newrelic-license-key
+              namespace: infra
+              key: ingestion.key
+              optional: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: core-banking-sim-j
+spec:
+  type: ClusterIP
+  selector:
+    app: core-banking-sim-j
+  ports:
+  - name: http
+    port: 8080

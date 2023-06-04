@@ -1,0 +1,5 @@
+*.bak
+*.env
+*.lic
+gcpsm-secret.yaml
+infra-secret.json
