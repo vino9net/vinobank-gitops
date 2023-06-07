@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fund-transfer
-        image: ghcr.io/vino9org/fund-transfer:1.1.1-SNAPSHOT # {"$imagepolicy": "vinobank:fund-transfer-snapshot"}
+        image: ghcr.io/vino9org/fund-transfer:1.1.1-SNAPSHOT # {"$imagepolicy": "vinobank-dev:fund-transfer-snapshot"}
         ports:
         - containerPort: 8080
         env:
