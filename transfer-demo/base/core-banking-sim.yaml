@@ -73,8 +73,8 @@ spec:
         ports:
         - containerPort: 8000
         env:
-        - name: QUARKUS_LOG_LEVEL
-          value: WARN
+        - name: SPRING_REDIS_HOST
+          value: redis
         - name: NEW_RELIC_APP_NAME
           value: vinobank/corebanking-sim-j
         - name: NEW_RELIC_LICENSE_KEY
