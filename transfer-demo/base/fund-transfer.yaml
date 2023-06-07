@@ -20,6 +20,8 @@ spec:
         env:
         - name: QUARKUS_LOG_LEVEL
           value: WARN
+        - name: QUARKUS_STORK_SERVICE_DISCOVER_K8S_NAMESPACE
+          value: vinobank-dev
         - name: NEW_RELIC_APP_NAME
           value: vinobank/fund-transfer
         - name: NEW_RELIC_LICENSE_KEY
