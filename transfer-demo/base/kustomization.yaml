@@ -4,5 +4,4 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
 - redis.yaml
 - core-banking-sim.yaml
-- core-banking-sim-j.yaml
 - fund-transfer.yaml

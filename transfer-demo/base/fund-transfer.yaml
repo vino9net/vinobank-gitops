@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fund-transfer
-        image: ghcr.io/vino9org/fund-transfer:1.1.1-SNAPSHOT # {"$imagepolicy": "vinobank:fund-transfer-snapshot"}
+        image: ghcr.io/vino9org/fund-transfer:1.1.6-SNAPSHOT # {"$imagepolicy": "vinobank-dev:fund-transfer-snapshot"}
         ports:
         - containerPort: 8080
         env:
@@ -40,3 +40,29 @@ spec:
   ports:
   - name: http
     port: 8080
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: stork
+rules:
+- apiGroups: [""]
+  resources: ["endpoints", "pods"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: stork
+subjects:
+- kind: ServiceAccount
+  name: default
+roleRef:
+  kind: Role
+  name: stork
+  apiGroup: rbac.authorization.k8s.io

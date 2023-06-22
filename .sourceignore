@@ -6,3 +6,5 @@
 
 # Include manifest directories
 !/transfer-demo
+!/git-indexer
+

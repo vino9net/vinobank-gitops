@@ -11,10 +11,11 @@ spec:
     metadata:
       labels:
         app: core-banking-sim
+        svc: core-banking-sim
     spec:
       containers:
       - name: core-banking-sim
-        image: ghcr.io/vino9org/core-banking-sim:develop-20230602-231728-89c41eb # {"$imagepolicy": "vinobank:core-banking-sim-develop"}
+        image: ghcr.io/vino9org/core-banking-sim:develop-20230608-014641-2225822 # {"$imagepolicy": "vinobank-dev:core-banking-sim-develop"}
         ports:
         - containerPort: 8000
         env:
@@ -51,6 +52,39 @@ spec:
         configMap:
           name: newrelic-ini
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-banking-sim-j
+spec:
+  selector:
+    matchLabels:
+      app: core-banking-sim-j
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: core-banking-sim-j
+        svc: core-banking-sim
+    spec:
+      containers:
+      - name: core-banking-sim-j
+        image: ghcr.io/vino9org/core-banking-sim-j:develop-20230608-101636-885e8b1 # {"$imagepolicy": "vinobank-dev:core-banking-sim-j-develop"}
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SPRING_REDIS_HOST
+          value: redis
+        - name: NEW_RELIC_APP_NAME
+          value: vinobank/corebanking-sim-j
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: newrelic-license-key
+              namespace: infra
+              key: ingestion.key
+              optional: true
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -58,7 +92,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: core-banking-sim
+    svc: core-banking-sim
   ports:
   - name: http
     port: 8000

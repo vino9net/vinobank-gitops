@@ -1,0 +1,24 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: git-indexer
+spec:
+  image: ghcr.io/sloppycoder/git-commit-indexer
+  interval: 1m0s
+  secretRef:
+    name: ghcr-cred
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: git-indexer-develop
+spec:
+  imageRepositoryRef:
+    name: git-indexer
+  filterTags:
+    pattern: '^develop-(?P<suffix>\d{8}\-\d{6}-[0-9a-f]{7})'
+    extract: '$suffix'
+  policy:
+    alphabetical:
+      order: asc
