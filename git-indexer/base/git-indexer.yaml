@@ -3,9 +3,8 @@ kind: CronJob
 metadata:
   name: git-indexer
 spec:
-  suspend: true
   schedule: "0 * * * *"
-  jobTemplate:spec:
+  jobTemplate:
     spec:
       template:
         metadata:
