@@ -14,6 +14,7 @@ spec:
           containers:
           - name: git-indexer
             image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-194026-5d9c264 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            imagePullPolicy: IfNotPresent
             env:
             - name: GITLAB_TOKEN
               valueFrom:
@@ -23,7 +24,6 @@ spec:
             volumeMounts:
             - name: data
               mountPath: /data
-          imagePullPolicy: IfNotPresent
           imagePullSecrets:
           - name: ghcr-cred
           restartPolicy: OnFailure
