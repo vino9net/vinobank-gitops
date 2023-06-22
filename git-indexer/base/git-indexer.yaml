@@ -3,9 +3,11 @@ kind: CronJob
 metadata:
   name: git-indexer
 spec:
-  schedule: "0 * * * *"
+  # At minute 5 past hour 2 and every 4th hour from 8 through 23.
+  schedule: "5 2,8-23/4 * * *"
   jobTemplate:
     spec:
+      suspend: true
       template:
         metadata:
           labels:
@@ -13,9 +15,8 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-212928-1d4a82c # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
-            imagePullPolicy: IfNotPresent
-            command: ["bin/sleep", "10000"]
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-234844-d575781 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            # command: ["bin/sleep", "10000"]
             env:
             - name: GITLAB_TOKEN
               valueFrom:
