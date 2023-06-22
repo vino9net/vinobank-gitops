@@ -15,7 +15,7 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-232432-0340945 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-234844-d575781 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
             - name: GITLAB_TOKEN
