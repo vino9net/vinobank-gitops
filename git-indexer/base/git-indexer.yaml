@@ -13,7 +13,7 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-210958-1f54ae0 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-212928-1d4a82c # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             imagePullPolicy: IfNotPresent
             command: ["/usr/bin/sleep", "10000"]
             env:
