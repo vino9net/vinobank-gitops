@@ -5,6 +5,8 @@ metadata:
 spec:
   image: ghcr.io/sloppycoder/git-commit-indexer
   interval: 1m0s
+  secretRef:
+    name: ghcr-cred
 
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta2
