@@ -13,7 +13,7 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-194026-5d9c264 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230622-205815-44dffe1 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             imagePullPolicy: IfNotPresent
             env:
             - name: GITLAB_TOKEN
@@ -31,7 +31,6 @@ spec:
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
