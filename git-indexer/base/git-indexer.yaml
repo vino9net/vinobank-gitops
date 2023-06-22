@@ -31,3 +31,15 @@ spec:
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: git-indexer-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
