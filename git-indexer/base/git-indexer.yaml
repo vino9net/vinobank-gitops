@@ -7,7 +7,7 @@ spec:
   schedule: "5 2,8-23/4 * * *"
   jobTemplate:
     spec:
-      suspend: true
+      suspend: false
       template:
         metadata:
           labels:
