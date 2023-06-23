@@ -25,7 +25,7 @@ spec:
             - name: GITLAB_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: bbx-dev-secret
+                  name: git-indexer-secret
                   key: gitlab-token
             volumeMounts:
             - name: data
@@ -43,6 +43,7 @@ spec:
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -54,6 +55,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -74,4 +76,21 @@ spec:
   - secretKey: jsonkey
     remoteRef:
       key: infra-secret
-      property: gs-vinolab-key
+      property: gs_vinolab_key
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: git-indexer-secret
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: gcp-secret-manager
+  target:
+    name: git-indexer-secret
+  data:
+  - secretKey: gitlab-token
+    remoteRef:
+      key: infra-secret
+      property: gitlab_token_sbc
