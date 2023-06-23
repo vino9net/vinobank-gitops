@@ -5,6 +5,8 @@ metadata:
 spec:
   # At minute 5 past hour 2 and every 4th hour from 8 through 23.
   schedule: "5 2,8-23/4 * * *"
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 5
   jobTemplate:
     spec:
       suspend: false
