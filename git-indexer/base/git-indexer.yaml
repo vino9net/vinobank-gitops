@@ -17,7 +17,7 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230623-001428-e9a5878 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230623-142055-756a058 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
@@ -54,7 +54,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
