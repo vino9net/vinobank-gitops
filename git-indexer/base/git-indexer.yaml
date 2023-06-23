@@ -17,7 +17,7 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230623-142055-756a058 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230623-163711-79643b0 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
@@ -43,7 +43,6 @@ spec:
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -55,7 +54,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -77,7 +75,6 @@ spec:
     remoteRef:
       key: infra-secret
       property: gs_vinolab_key
-
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
