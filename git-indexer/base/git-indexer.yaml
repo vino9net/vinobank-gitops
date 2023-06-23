@@ -67,7 +67,7 @@ spec:
     template:
       type: Opaque
       data:
-        gs-vinolab-user.json: "{{ .json-key | toString }}"
+        "gs-vinolab-user.json": "{{ .json-key | toString }}"
     creationPolicy: Owner
   data:
   - secretKey: json-key
