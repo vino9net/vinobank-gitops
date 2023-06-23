@@ -17,15 +17,19 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230623-142055-756a058 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230626-200834-c1beaa7 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /etc/secret/gs-vinolab-user.json
+            - name: QUERY
+              value: /securitybankph/shared
+            - name: FILTER
+              value: "*blueprint*"
             - name: GITLAB_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: bbx-dev-secret
+                  name: git-indexer-secret
                   key: gitlab-token
             volumeMounts:
             - name: data
@@ -74,4 +78,20 @@ spec:
   - secretKey: jsonkey
     remoteRef:
       key: infra-secret
-      property: gs-vinolab-key
+      property: gs_vinolab_key
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: git-indexer-secret
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: gcp-secret-manager
+  target:
+    name: git-indexer-secret
+  data:
+  - secretKey: gitlab-token
+    remoteRef:
+      key: infra-secret
+      property: gitlab_token_sbc
