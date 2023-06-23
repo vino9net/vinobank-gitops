@@ -22,6 +22,10 @@ spec:
             env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /etc/secret/gs-vinolab-user.json
+            - name: QUERY
+              value: /securitybankph/shared
+            - name: FILTER
+              value: "*blueprint*"
             - name: GITLAB_TOKEN
               valueFrom:
                 secretKeyRef:
