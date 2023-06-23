@@ -18,6 +18,8 @@ spec:
             image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230623-001428-e9a5878 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /etc/secret/gs-vinolab-user.json
             - name: GITLAB_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -26,10 +28,16 @@ spec:
             volumeMounts:
             - name: data
               mountPath: /data
+            - name: cloud-storage-cred
+              mountPath: "/etc/secret"
+              readOnly: true
           imagePullSecrets:
           - name: ghcr-cred
           restartPolicy: OnFailure
           volumes:
+          - name: cloud-storage-cred
+            secret:
+              secretName: cloud-storage-cred
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
@@ -44,3 +52,25 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: cloud-storage-cred
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: gcp-secret-manager
+  target:
+    name: cloud-storage-cred
+    template:
+      type: Opaque
+      data:
+        gs-vinolab-user.json: "{{ .json-key | toString }}"
+    creationPolicy: Owner
+  data:
+  - secretKey: json-key
+    remoteRef:
+      key: infra-secret
+      property: gs-vinolab-key
