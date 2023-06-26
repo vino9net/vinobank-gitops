@@ -47,6 +47,7 @@ spec:
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -58,6 +59,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
