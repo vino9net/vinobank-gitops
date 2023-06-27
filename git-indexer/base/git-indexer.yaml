@@ -3,8 +3,8 @@ kind: CronJob
 metadata:
   name: git-indexer
 spec:
-  # At minute 5 past hour 2 and every 4th hour from 8 through 23.
-  schedule: "5 2,8-23/4 * * *"
+  # At minute 5 past hour 2 and every 4th hour from 10 through 22
+  schedule: "5 2,10-22/4 * * *"
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
   jobTemplate:
