@@ -21,7 +21,7 @@ spec:
             # command: ["bin/sleep", "10000"]
             env:
             - name: SQLALCHEMY_DATABASE_URI
-              value: postgresql+psycopg2//git:git@git-indexer-postgres:5432/gitindexer
+              value: postgresql+psycopg2://git:git@git-indexer-postgres:5432/gitindexer
             - name: QUERY
               value: /securitybankph
             - name: FILTER
