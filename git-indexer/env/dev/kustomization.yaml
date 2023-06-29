@@ -7,6 +7,9 @@ resources:
 
 namespace: bbx-dev
 
+generatorOptions:
+  disableNameSuffixHash: true
+
 secretGenerator:
 - name: postgres-secret
   literals:
