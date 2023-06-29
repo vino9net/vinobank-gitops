@@ -9,13 +9,12 @@ spec:
   successfulJobsHistoryLimit: 5
   jobTemplate:
     spec:
-      suspend: false
+      suspend: true
       template:
         metadata:
           labels:
             job: git-indexer-job
         spec:
-          suspend: true
           containers:
           - name: git-indexer
             image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230629-164059-b471d2c # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
