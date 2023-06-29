@@ -19,19 +19,3 @@ spec:
       secretKeyRef:
         name: postgres-secret
         key: postgres_replication_password
-  - name: POSTGRES_USER
-    valueFrom:
-      secretKeyRef:
-        name: postgres-secret
-        key: postgres_user
-  - name: POSTGRES_DB
-    valueFrom:
-      secretKeyRef:
-        name: postgres-secret
-        key: postgres_db
-  - name: POSTGRES_MY_DBPASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: postgres-secret
-        key: postgres_my_dbpassword
-
