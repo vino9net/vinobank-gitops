@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: git-indexer
+  name: git-indexer-job
 spec:
   # At minute 5 past hour 2 and every 4th hour from 10 through 22
   schedule: "5 2,10-22/4 * * *"
@@ -13,15 +13,15 @@ spec:
       template:
         metadata:
           labels:
-            job: git-indexer
+            job: git-indexer-job
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230627-102027-cd01af4 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230629-125805-7250005 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
-            - name: GOOGLE_APPLICATION_CREDENTIALS
-              value: /etc/secret/gs-vinolab-user.json
+            - name: SQLALCHEMY_DATABASE_URI
+              value: postgresql+psycopg2//git:git@git-indexer-postgres:5432/gitindexer
             - name: QUERY
               value: /securitybankph
             - name: FILTER
@@ -32,18 +32,19 @@ spec:
                   name: git-indexer-secret
                   key: gitlab-token
             volumeMounts:
+            - name: git-secret
+              mountPath: "/root/.ssh"
+              defaultMode: 0600
+              readOnly: true
             - name: data
               mountPath: /data
-            - name: cloud-storage-cred
-              mountPath: "/etc/secret"
-              readOnly: true
           imagePullSecrets:
           - name: ghcr-cred
           restartPolicy: OnFailure
           volumes:
-          - name: cloud-storage-cred
+          - name: git-secret
             secret:
-              secretName: cloud-storage-cred
+              secretName: git-secret
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data

@@ -1,0 +1,22 @@
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: git-indexer-postgres
+spec:
+  replicas: 1
+  image: postgres:14.5
+  database:
+    size: 3Gi
+  env:
+  # skip all the security here :))
+  - name: POSTGRES_PASSWORD
+    value: postgres
+  - name: POSTGRES_REPLICATION_PASSWORD
+    value: replication
+  - name: POSTGRES_USER
+    value: git
+  - name: POSTGRES_DB
+    value: git_indexer
+  - name: POSTGRES_MY_DBPASSWORD
+    value: git
+
