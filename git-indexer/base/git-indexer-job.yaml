@@ -34,7 +34,6 @@ spec:
             volumeMounts:
             - name: git-secret
               mountPath: "/root/.ssh"
-              defaultMode: 0600
               readOnly: true
             - name: data
               mountPath: /data
@@ -45,6 +44,7 @@ spec:
           - name: git-secret
             secret:
               secretName: git-secret
+              defaultMode: 0600
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
