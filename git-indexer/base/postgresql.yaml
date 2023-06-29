@@ -10,13 +10,28 @@ spec:
   env:
   # skip all the security here :))
   - name: POSTGRES_PASSWORD
-    value: postgres
+    valueFrom:
+      secretKeyRef:
+        name: postgres-secret
+        key: postgres_password
   - name: POSTGRES_REPLICATION_PASSWORD
-    value: replication
+    valueFrom:
+      secretKeyRef:
+        name: postgres-secret
+        key: postgres_replication_password
   - name: POSTGRES_USER
-    value: git
+    valueFrom:
+      secretKeyRef:
+        name: postgres-secret
+        key: postgres_user
   - name: POSTGRES_DB
-    value: git_indexer
+    valueFrom:
+      secretKeyRef:
+        name: postgres-secret
+        key: postgres_db
   - name: POSTGRES_MY_DBPASSWORD
-    value: git
+    valueFrom:
+      secretKeyRef:
+        name: postgres-secret
+        key: postgres_my_dbpassword
 
