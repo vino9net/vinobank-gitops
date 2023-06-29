@@ -6,3 +6,12 @@ resources:
 - ingress.yaml
 
 namespace: bbx-dev
+
+secretGenerator:
+- name: postgres-secret
+  literals:
+  - postgres_password=postgres
+  - postgres_replication_password=replication
+  - postgres_user=git
+  - postgres_db=gitindexer
+  - postgres_my_dbpassword=git
