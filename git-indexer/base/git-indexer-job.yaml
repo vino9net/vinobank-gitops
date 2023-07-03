@@ -17,7 +17,7 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230703-183237-675ee4b # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230703-231503-9e3edd1 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
             - name: SQLALCHEMY_DATABASE_URI
