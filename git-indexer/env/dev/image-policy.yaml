@@ -3,7 +3,7 @@ kind: ImageRepository
 metadata:
   name: git-indexer
 spec:
-  image: ghcr.io/sloppycoder/git-commit-indexer
+  image: ghcr.io/vino9org/git-indexer
   interval: 1m0s
   secretRef:
     name: ghcr-cred
