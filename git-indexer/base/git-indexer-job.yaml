@@ -22,8 +22,6 @@ spec:
             env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /etc/secret/gs-vinolab-user.json
-            - name: SQLALCHEMY_DATABASE_URI
-              value: sqlite:////data/git-indexer/git-indexer.db
             - name: QUERY
               value: /securitybankph
             - name: FILTER
