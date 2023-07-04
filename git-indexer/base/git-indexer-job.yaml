@@ -56,7 +56,8 @@ spec:
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
-              accessModes: ReadWriteMany
+              accessModes:
+              - ReadWriteMany
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
