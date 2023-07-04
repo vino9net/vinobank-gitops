@@ -26,9 +26,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: git-indexer-data
-          accessModes:
-          - ReadWriteMany
+          claimName: git-indexer-pvc
 ---
 apiVersion: v1
 kind: Service

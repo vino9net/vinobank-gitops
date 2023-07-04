@@ -55,20 +55,7 @@ spec:
               secretName: cloud-storage-cred
           - name: data
             persistentVolumeClaim:
-              claimName: git-indexer-data
-              accessModes:
-              - ReadWriteMany
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: git-indexer-data
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+              claimName: git-indexer-pvc
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
