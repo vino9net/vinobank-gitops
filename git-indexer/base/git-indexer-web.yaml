@@ -20,8 +20,14 @@ spec:
         env:
         - name: SQLALCHEMY_DATABASE_URI
           value: sqlite:////data/git-indexer/git-indexer.db
-      imagePullSecrets:
-      - name: ghcr-cred
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: git-indexer-data
+
 ---
 apiVersion: v1
 kind: Service
