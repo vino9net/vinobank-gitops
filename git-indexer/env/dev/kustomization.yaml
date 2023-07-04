@@ -6,12 +6,3 @@ resources:
 - ingress.yaml
 
 namespace: bbx-dev
-
-generatorOptions:
-  disableNameSuffixHash: true
-
-secretGenerator:
-- name: postgres-secret
-  literals:
-  - postgres_password=postgres
-  - postgres_replication_password=replication
