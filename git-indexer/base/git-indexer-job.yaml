@@ -17,11 +17,13 @@ spec:
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230629-164059-b471d2c # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/vino9org/git-indexer:develop-20230704-214541-d71854a # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /etc/secret/gs-vinolab-user.json
             - name: SQLALCHEMY_DATABASE_URI
-              value: postgresql+psycopg2://git:git@git-indexer-postgres:5432/gitindexer
+              value: sqlite:////data/git-indexer/git-indexer.db
             - name: QUERY
               value: /securitybankph
             - name: FILTER
@@ -37,6 +39,9 @@ spec:
               readOnly: true
             - name: data
               mountPath: /data
+            - name: cloud-storage-cred
+              mountPath: "/etc/secret"
+              readOnly: true
           imagePullSecrets:
           - name: ghcr-cred
           restartPolicy: OnFailure
@@ -45,6 +50,9 @@ spec:
             secret:
               secretName: git-secret
               defaultMode: 0600
+          - name: cloud-storage-cred
+            secret:
+              secretName: cloud-storage-cred
           - name: data
             persistentVolumeClaim:
               claimName: git-indexer-data
@@ -59,6 +67,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -75,3 +84,25 @@ spec:
     remoteRef:
       key: infra-secret
       property: gitlab_token_sbc
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: cloud-storage-cred
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: gcp-secret-manager
+  target:
+    name: cloud-storage-cred
+    template:
+      type: Opaque
+      data:
+        gs-vinolab-user.json: "{{ .jsonkey | toString }}"
+    creationPolicy: Owner
+  data:
+  - secretKey: jsonkey
+    remoteRef:
+      key: infra-secret
+      property: gs_vinolab_key
