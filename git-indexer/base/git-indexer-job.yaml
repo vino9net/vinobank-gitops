@@ -17,7 +17,11 @@ spec:
         spec:
           containers:
           - name: git-indexer
+<<<<<<< HEAD
             image: ghcr.io/vino9org/git-indexer:develop-20230704-214541-d71854a # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+=======
+            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230704-211141-124c322 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+>>>>>>> cdb161cb907d7dc4c5fceb3b4a20e86b91cf15ec
             # command: ["bin/sleep", "10000"]
             env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
