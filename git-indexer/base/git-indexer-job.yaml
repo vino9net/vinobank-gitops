@@ -5,7 +5,8 @@ metadata:
 spec:
   suspend: false
   # At minute 5 past hour 2 and every 4th hour from 10 through 22
-  schedule: "5 2,10-22/4 * * *"
+  # from Monday through Friday
+  schedule: "5 2,10-22/4 * * 1-5"
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
   jobTemplate:
