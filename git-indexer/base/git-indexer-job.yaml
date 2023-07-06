@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: git-indexer-job
 spec:
-  suspend: true
+  suspend: false
   # At minute 5 past hour 2 and every 4th hour from 10 through 22
   schedule: "5 2,10-22/4 * * *"
   failedJobsHistoryLimit: 1
