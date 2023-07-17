@@ -4,9 +4,10 @@ metadata:
   name: git-indexer-job
 spec:
   suspend: false
-  # At minute 5 past hour 2 and every 4th hour from 10 through 22
-  # from Monday through Friday
-  schedule: "5 2,10-22/4 * * 1-5"
+  # At minute 30 past hour 2 and every 4th hour from 11 through 21 on
+  # every day-of-week from Monday through Friday. that is:
+  # 2:30 11:30, 15:30, 19:30
+  schedule: "30 2,11-21/4 * * 1-5"
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
   jobTemplate:
