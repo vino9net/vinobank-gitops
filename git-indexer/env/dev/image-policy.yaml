@@ -15,7 +15,7 @@ metadata:
   name: git-indexer-develop
 spec:
   imageRepositoryRef:
-    name: git-indexer
+    name: dj-git-indexer
   filterTags:
     pattern: '^develop-(?P<suffix>\d{8}\-\d{6}-[0-9a-f]{7})'
     extract: '$suffix'
