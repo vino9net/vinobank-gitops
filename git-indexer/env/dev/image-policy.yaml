@@ -1,9 +1,9 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
-  name: git-indexer
+  name: dj-git-indexer
 spec:
-  image: ghcr.io/vino9org/git-indexer
+  image: ghcr.io/vino9org/dj-git-indexer
   interval: 1m0s
   secretRef:
     name: ghcr-cred
