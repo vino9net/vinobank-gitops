@@ -20,10 +20,11 @@ spec:
           containers:
           - name: git-indexer
             image: ghcr.io/vino9org/dj-git-indexer:develop-20230718-190932-ff76b73 # {"$imagepolicy": "bbx-dev:dj-git-indexer-develop"}
-            # command: ["bin/sleep", "10000"]
             env:
-            - name: SQLITE_FILE
-              value: /data/git-indexer/git-indexer.db
+            - name: RUN_MODE
+              value: index
+            - name: DATABASE_URL
+              value: sqlite:////data/git-indexer/git-indexer.db
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /etc/secret/gs-vinolab-user.json
             - name: QUERY
