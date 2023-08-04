@@ -16,7 +16,6 @@ spec:
       - name: git-indexer
         image: ghcr.io/vino9org/dj-git-indexer:develop-20230804-000704-6ea07e1 # {"$imagepolicy": "bbx-dev:dj-git-indexer-develop"}
         # command: ["bin/sleep", "10000"]
-        command: ["gunicorn", "-w", "1", "crawler.wsgi", "--bind", "0.0.0.0:8000"]
         env:
         - name: DATABASE_URL
           value: sqlite:////data/git-indexer/git-indexer.db
