@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: git-indexer
-        image: ghcr.io/vino9org/dj-git-indexer:develop-20230806-165336-fc2db4d # {"$imagepolicy": "bbx-dev:dj-git-indexer-develop"}
+        image: ghcr.io/vino9org/dj-git-indexer:develop-20230806-233852-69d3c8d # {"$imagepolicy": "bbx-dev:dj-git-indexer-develop"}
         # command: ["bin/sleep", "10000"]
         env:
         - name: DATABASE_URL
