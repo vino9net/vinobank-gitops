@@ -19,6 +19,8 @@ spec:
         env:
         - name: DATABASE_URL
           value: sqlite:////data/git-indexer/git-indexer.db
+        - name: DJANGO_CONTEXT_PATH
+          value: /git/dev
         volumeMounts:
         - name: data
           mountPath: /data
