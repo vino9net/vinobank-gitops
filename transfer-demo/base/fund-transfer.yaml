@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
       - name: fund-transfer
-        image: ghcr.io/vino9org/fund-transfer:1.1.6-SNAPSHOT # {"$imagepolicy": "vino-dev:fund-transfer-snapshot"}
+        image: ghcr.io/vino9org/fund-transfer:1.1.6-SNAPSHOT # {"$imagepolicy": "vinobank-dev:fund-transfer-snapshot"}
         ports:
         - containerPort: 8080
         env:
         - name: QUARKUS_LOG_LEVEL
           value: WARN
         - name: NEW_RELIC_APP_NAME
-          value: vino/fund-transfer
+          value: vinobank/fund-transfer
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:

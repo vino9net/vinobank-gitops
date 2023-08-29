@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: core-banking-sim
-        image: ghcr.io/vino9org/core-banking-sim:develop-20230608-014641-2225822 # {"$imagepolicy": "vino-dev:core-banking-sim-develop"}
+        image: ghcr.io/vino9org/core-banking-sim:develop-20230608-014641-2225822 # {"$imagepolicy": "vinobank-dev:core-banking-sim-develop"}
         ports:
         - containerPort: 8000
         env:
@@ -69,14 +69,14 @@ spec:
     spec:
       containers:
       - name: core-banking-sim-j
-        image: ghcr.io/vino9org/core-banking-sim-j:develop-20230608-101636-885e8b1 # {"$imagepolicy": "vino-dev:core-banking-sim-j-develop"}
+        image: ghcr.io/vino9org/core-banking-sim-j:develop-20230608-101636-885e8b1 # {"$imagepolicy": "vinobank-dev:core-banking-sim-j-develop"}
         ports:
         - containerPort: 8000
         env:
         - name: SPRING_REDIS_HOST
           value: redis
         - name: NEW_RELIC_APP_NAME
-          value: vino/corebanking-sim-j
+          value: vinobank/corebanking-sim-j
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:

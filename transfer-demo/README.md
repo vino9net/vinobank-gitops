@@ -1,4 +1,4 @@
-# Vino Demo App
+# Vinobank Demo App
 
 this app requires some external secrets to work.
 

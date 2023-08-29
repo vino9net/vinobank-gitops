@@ -5,7 +5,7 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-    - /vino/prod
+    - /vinobank/prod
     forceSlash: false
 
 ---
@@ -15,13 +15,13 @@ metadata:
   name: fund-transfer
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
-    traefik.ingress.kubernetes.io/router.middlewares: vino-strip-prefix@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: vinobank-strip-prefix@kubernetescrd
     traefik.ingress.kubernetes.io/router.priority: "80"
 spec:
   rules:
   - http:
       paths:
-      - path: /vino/prod
+      - path: /vinobank/prod
         pathType: Prefix
         backend:
           service:
