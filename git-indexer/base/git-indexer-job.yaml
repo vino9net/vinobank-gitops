@@ -1,37 +1,46 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: git-indexer
+  name: git-indexer-job
 spec:
-  # At minute 5 past hour 2 and every 4th hour from 8 through 23.
-  schedule: "5 2,8-23/4 * * *"
+  suspend: false
+  # At minute 30 past hour 2 and every 4th hour from 11 through 21 on
+  # every day-of-week from Monday through Friday. that is:
+  # 2:30 11:30, 15:30, 19:30
+  schedule: "30 2,11-21/4 * * 1-5"
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
   jobTemplate:
     spec:
-      suspend: false
       template:
         metadata:
           labels:
-            job: git-indexer
+            job: git-indexer-job
         spec:
           containers:
           - name: git-indexer
-            image: ghcr.io/sloppycoder/git-commit-indexer:develop-20230626-200834-c1beaa7 # {"$imagepolicy": "bbx-dev:git-indexer-develop"}
+            image: ghcr.io/vino9org/dj-git-indexer:develop-20230807-124357-0156b6b # {"$imagepolicy": "bbx-dev:dj-git-indexer-develop"}
             # command: ["bin/sleep", "10000"]
             env:
+            - name: RUN_MODE
+              value: index
+            - name: DATABASE_URL
+              value: sqlite:////data/git-indexer/git-indexer.db
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /etc/secret/gs-vinolab-user.json
             - name: QUERY
-              value: /securitybankph/shared
+              value: /securitybankph
             - name: FILTER
-              value: "*blueprint*"
+              value: "*"
             - name: GITLAB_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: git-indexer-secret
                   key: gitlab-token
             volumeMounts:
+            - name: git-secret
+              mountPath: "/root/.ssh"
+              readOnly: true
             - name: data
               mountPath: /data
             - name: cloud-storage-cred
@@ -41,25 +50,32 @@ spec:
           - name: ghcr-cred
           restartPolicy: OnFailure
           volumes:
+          - name: git-secret
+            secret:
+              secretName: git-secret
+              defaultMode: 0600
           - name: cloud-storage-cred
             secret:
               secretName: cloud-storage-cred
           - name: data
             persistentVolumeClaim:
-              claimName: git-indexer-data
-
+              claimName: git-indexer-pvc
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
 metadata:
-  name: git-indexer-data
+  name: git-indexer-secret
 spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: gcp-secret-manager
+  target:
+    name: git-indexer-secret
+  data:
+  - secretKey: gitlab-token
+    remoteRef:
+      key: infra-secret
+      property: gitlab_token_sbc
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -81,19 +97,3 @@ spec:
     remoteRef:
       key: infra-secret
       property: gs_vinolab_key
----
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: git-indexer-secret
-spec:
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: gcp-secret-manager
-  target:
-    name: git-indexer-secret
-  data:
-  - secretKey: gitlab-token
-    remoteRef:
-      key: infra-secret
-      property: gitlab_token_sbc
