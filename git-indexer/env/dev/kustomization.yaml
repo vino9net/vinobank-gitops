@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
 - ../../base
 - image-policy.yaml
+- ingress.yaml
 
 namespace: bbx-dev

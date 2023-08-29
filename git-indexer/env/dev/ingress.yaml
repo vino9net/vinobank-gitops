@@ -5,26 +5,26 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-    - /vino/prod
+    - /git/dev
     forceSlash: false
 
 ---
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: fund-transfer
+  name: git-indexer-web
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
-    traefik.ingress.kubernetes.io/router.middlewares: vino-strip-prefix@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: bbx-dev-strip-prefix@kubernetescrd
     traefik.ingress.kubernetes.io/router.priority: "80"
 spec:
   rules:
   - http:
       paths:
-      - path: /vino/prod
+      - path: /git/dev
         pathType: Prefix
         backend:
           service:
-            name: fund-transfer
+            name: git-indexer-web
             port:
               name: http

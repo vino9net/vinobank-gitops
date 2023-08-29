@@ -5,7 +5,7 @@ resources:
 - ../../base
 - ingress.yaml
 
-namespace: vinobank
+namespace: vino
 
 generatorOptions:
   disableNameSuffixHash: true
@@ -27,5 +27,7 @@ patchesJson6902:
   patch: |-
     - op: add
       path: /spec/template/spec/containers/0/env/0
-      value: { "name": "QUARKUS_STORK_CORE_BANKING_SIM_SERVICE_DISCOVERY_K8S_NAMESPACE", "value": "vinobank" }
+      value:
+        - name: QUARKUS_STORK_CORE_BANKING_SIM_SERVICE_DISCOVERY_K8S_NAMESPACE
+          value: vino
 
