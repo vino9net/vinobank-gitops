@@ -28,6 +28,6 @@ patchesJson6902:
     - op: add
       path: /spec/template/spec/containers/0/env/0
       value:
-        - name: QUARKUS_STORK_CORE_BANKING_SIM_SERVICE_DISCOVERY_K8S_NAMESPACE
-          value: vinobank
+        name: QUARKUS_STORK_CORE_BANKING_SIM_SERVICE_DISCOVERY_K8S_NAMESPACE
+        value: vinobank
 
