@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: git-indexer-job
 spec:
-  suspend: false
+  suspend: true
   # At minute 30 past hour 2 and every 4th hour from 11 through 21 on
   # every day-of-week from Monday through Friday. that is:
   # 2:30 11:30, 15:30, 19:30
