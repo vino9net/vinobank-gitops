@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: core-banking-sim
-        image: ghcr.io/vino9org/core-banking-sim:develop-20230608-014641-2225822 # {"$imagepolicy": "vinobank-dev:core-banking-sim-develop"}
+        image: ghcr.io/vino9org/core-banking-sim:develop-20231015-194831-208589c # {"$imagepolicy": "vinobank-dev:core-banking-sim-develop"}
         ports:
         - containerPort: 8000
         env:
