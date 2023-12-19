@@ -12,10 +12,10 @@ spec:
   - name: POSTGRES_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: bbx-dev-secret
+        name: git-indexer-secret
         key: postgres-password
   - name: POSTGRES_REPLICATION_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: bbx-dev-secret
+        name: git-indexer-secret
         key: postgres-replication-password
