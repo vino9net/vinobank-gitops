@@ -27,14 +27,14 @@ spec:
               name: git-indexer-secret
               key: git-indexer-db-url
         volumeMounts:
-        # - name: mirror
-        #   mountPath: /mirror
+        - name: mirror
+          mountPath: /mirror
       imagePullSecrets:
       - name: ghcr-cred
-      # volumes:
-      # - name: mirror
-      #   persistentVolumeClaim:
-      #     claimName: git-indexer-pvc
+      volumes:
+      - name: mirror
+        persistentVolumeClaim:
+          claimName: git-indexer-pvc
 
 ---
 apiVersion: v1
