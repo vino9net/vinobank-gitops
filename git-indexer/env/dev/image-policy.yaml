@@ -3,7 +3,7 @@ kind: ImageRepository
 metadata:
   name: dj-git-indexer
 spec:
-  image: ghcr.io/vino9org/dj-git-indexer
+  image: ghcr.io/vino9org/git-indexer
   interval: 1m0s
   secretRef:
     name: ghcr-cred
