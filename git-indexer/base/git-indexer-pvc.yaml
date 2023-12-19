@@ -4,7 +4,7 @@ metadata:
   name: git-indexer-pvc
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 3Gi
+      storage: 1Gi
