@@ -12,13 +12,13 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
-  name: dj-git-indexer-develop
+  name: git-indexer-tag
 spec:
   imageRepositoryRef:
     name: dj-git-indexer
   filterTags:
-    pattern: '^develop-(?P<suffix>\d{8}\-\d{6}-[0-9a-f]{7})'
-    extract: '$suffix'
+    pattern: '(?P<tag>^v-\d.*)'
+    extract: '$tag'
   policy:
     alphabetical:
       order: asc

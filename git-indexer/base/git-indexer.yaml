@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-indexer
+spec:
+  selector:
+    matchLabels:
+      app: git-indexer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: git-indexer
+    spec:
+      containers:
+      - name: git-indexer
+        image: ghcr.io/vino9org/git-indexer:v0.2.1 # {"$imagepolicy": "bbx-dev:git-indexer-tag"}
+        env:
+        - name: GITLAB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: git-indexer-secret
+              key: gitlab-token
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: git-indexer-secret
+              key: git-indexer-db-url
+        volumeMounts:
+        - name: mirror
+          mountPath: /mirror
+      imagePullSecrets:
+      - name: ghcr-cred
+      restartPolicy: OnFailure
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: git-indexer-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: git-indexer
+spec:
+  type: ClusterIP
+  selector:
+    app: git-indexer
+  ports:
+  - name: http
+    port: 8000
