@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
-  name: dj-git-indexer
+  name: git-indexer
 spec:
   image: ghcr.io/vino9org/git-indexer
   interval: 1m0s
@@ -15,9 +15,9 @@ metadata:
   name: git-indexer-tag
 spec:
   imageRepositoryRef:
-    name: dj-git-indexer
+    name: git-indexer
   filterTags:
-    pattern: '(?P<tag>^v-\d.*)'
+    pattern: '(?P<tag>^v\d.*)'
     extract: '$tag'
   policy:
     alphabetical:
