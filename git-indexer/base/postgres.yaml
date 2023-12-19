@@ -3,18 +3,19 @@ kind: Kubegres
 metadata:
   name: postgres
 spec:
-   replicas: 1
-   image: postgres:13.1
-   database:
-      size: 500Mi
-   env:
-    - name: POSTGRES_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: bbx-dev-secret
-          key: postgres-password
-    - name: POSTGRES_REPLICATION_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: bbx-dev-secret
-          key: postgres-replication-password
+  replicas: 1
+  image: postgres:13.1
+  port: 5432
+  database:
+    size: 500Mi
+  env:
+  - name: POSTGRES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: bbx-dev-secret
+        key: postgres-password
+  - name: POSTGRES_REPLICATION_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: bbx-dev-secret
+        key: postgres-replication-password
