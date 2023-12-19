@@ -31,9 +31,8 @@ spec:
           mountPath: /mirror
       imagePullSecrets:
       - name: ghcr-cred
-      restartPolicy: OnFailure
       volumes:
-      - name: data
+      - name: mirror
         persistentVolumeClaim:
           claimName: git-indexer-pvc
 
