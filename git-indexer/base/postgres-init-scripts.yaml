@@ -13,8 +13,6 @@ data:
     dt=$(date '+%d/%m/%Y %H:%M:%S');
     echo "$dt - Running init script the 1st time Primary PostgreSql container is created...";
 
-    echo "$dt - Running: psql -v ON_ERROR_STOP=1 --username postgres --dbname postgres ...";
-
     psql -v ON_ERROR_STOP=1 --username postgres --dbname postgres <<-EOSQL
     CREATE USER $APP_PGUSER WITH PASSWORD '$APP_PGPASSWORD';
     CREATE DATABASE gitdb;
