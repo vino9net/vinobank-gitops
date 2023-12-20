@@ -4,3 +4,4 @@ resources:
 - git-indexer-pvc.yaml
 - git-indexer.yaml
 - postgres.yaml
+- postgres-init-scripts.yaml

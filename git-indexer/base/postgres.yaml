@@ -8,6 +8,7 @@ spec:
   port: 5432
   database:
     size: 500Mi
+  customConfig: postgres-init-scripts
   env:
   - name: POSTGRES_PASSWORD
     valueFrom:
