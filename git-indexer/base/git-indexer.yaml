@@ -25,7 +25,19 @@ spec:
           valueFrom:
             secretKeyRef:
               name: git-indexer-secret
-              key: git-indexer-db-url
+              key: app-db-url
+        - name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              name: git-indexer-secret
+              key: app-pg-user
+              optional: true
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: git-indexer-secret
+              key: app-pg-password
+              optional: true
         volumeMounts:
         - name: mirror
           mountPath: /mirror

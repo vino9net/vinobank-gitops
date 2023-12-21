@@ -15,8 +15,8 @@ data:
 
     psql -v ON_ERROR_STOP=1 --username postgres --dbname postgres <<-EOSQL
     CREATE USER $APP_PGUSER WITH PASSWORD '$APP_PGPASSWORD';
-    CREATE DATABASE gitdb;
-    \connect gitdb;
+    CREATE DATABASE $APP_DBNAME;
+    \connect $APP_DBNAME;
     GRANT ALL ON SCHEMA public TO $APP_PGUSER;
     EOSQL
 

@@ -20,7 +20,18 @@ spec:
       secretKeyRef:
         name: git-indexer-secret
         key: postgres-replication-password
+  - name: APP_DBNAME
+    valueFrom:
+      secretKeyRef:
+        name: git-indexer-secret
+        key: app-pg-dbname
   - name: APP_PGUSER
-    value: git
+    valueFrom:
+      secretKeyRef:
+        name: git-indexer-secret
+        key: app-pg-user
   - name: APP_PGPASSWORD
-    value: git
+    valueFrom:
+      secretKeyRef:
+        name: git-indexer-secret
+        key: app-pg-password
