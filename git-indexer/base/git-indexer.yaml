@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: git-indexer
-        image: ghcr.io/vino9org/git-indexer:v0.2.3 # {"$imagepolicy": "bbx-dev:git-indexer-tag"}
+        image: ghcr.io/vino9org/git-indexer:v0.2.4 # {"$imagepolicy": "bbx-dev:git-indexer-tag"}
         env:
         - name: GITLAB_TOKEN
           valueFrom:
