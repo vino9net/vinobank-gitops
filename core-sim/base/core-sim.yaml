@@ -21,6 +21,8 @@ spec:
         env:
         - name: DATABASE_URL
           value: postgres://vinocore:vinocore@vino-core.c4bdt5vbjo45.us-west-2.rds.amazonaws.com:5432/vinocore
+      imagePullSecrets:
+      - name: ghcr-cred
 ---
 apiVersion: v1
 kind: Service
