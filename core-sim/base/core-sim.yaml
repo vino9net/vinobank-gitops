@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-sim
+spec:
+  selector:
+    matchLabels:
+      app: core-sim
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: core-sim
+        svc: core-sim
+    spec:
+      containers:
+      - name: core-sim
+        image: ghcr.io/vino9org/core_sim:develop-20240615-163248-a933d0b # {"$imagepolicy": "vinobank:core-sim-develop"}
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          value: postgres://vinocore:vinocore@vino-core.c4bdt5vbjo45.us-west-2.rds.amazonaws.com:5432/vinocore
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: core-sim
+spec:
+  type: ClusterIP
+  selector:
+    svc: core-sim
+  ports:
+  - name: http
+    port: 8000
