@@ -5,6 +5,8 @@ metadata:
 spec:
   image: ghcr.io/vino9org/core_sim
   interval: 1m0s
+  secretRef:
+    name: ghcr-cred
 
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta2
