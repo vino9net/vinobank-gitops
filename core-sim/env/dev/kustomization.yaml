@@ -6,4 +6,4 @@ resources:
 - ingress.yaml
 - image-policy.yaml
 
-namespace: vinobank
+namespace: vinobank-dev
