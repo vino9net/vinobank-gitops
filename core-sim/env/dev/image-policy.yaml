@@ -3,7 +3,7 @@ kind: ImageRepository
 metadata:
   name: core-sim
 spec:
-  image: ghcr.io/vino9org/core_sim
+  image: ghcr.io/vino9org/core-sim-3
   interval: 1m0s
   secretRef:
     name: ghcr-cred
