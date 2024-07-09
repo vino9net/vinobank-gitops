@@ -21,6 +21,15 @@ spec:
         env:
         - name: DATABASE_URL
           value: asyncpg://vinocore:vinocore@10.0.28.32:5432/vinocore
+        - name: WORKERS
+          value: "1"
+      resources:
+          requests:
+            memory: "512Mi"
+            cpu: "0.5"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
 ---
 apiVersion: v1
 kind: Service
