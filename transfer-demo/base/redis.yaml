@@ -15,33 +15,33 @@ spec:
         name: redis
     spec:
       containers:
-      - name: redis
-        image: redis:7.0.11
-        args: ["/config/redis.conf"]
-        ports:
         - name: redis
-          containerPort: 6379
-        volumeMounts:
-        - name: config
-          mountPath: /config
-        - name: redis-data
-          mountPath: /data
+          image: redis:7.0.11
+          args: ["/config/redis.conf"]
+          ports:
+            - name: redis
+              containerPort: 6379
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: redis-data
+              mountPath: /data
       volumes:
-      - name: config
-        configMap:
-          name: redis-config
-          items:
-          - key: redis.conf
-            path: redis.conf
+        - name: config
+          configMap:
+            name: redis-config
+            items:
+              - key: redis.conf
+                path: redis.conf
   volumeClaimTemplates:
-  - metadata:
-      name: redis-data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 1Gi
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
 
 ---
 apiVersion: v1
@@ -53,6 +53,6 @@ spec:
     app: redis
   type: ClusterIP
   ports:
-  - protocol: TCP
-    port: 6379
-    targetPort: 6379
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
