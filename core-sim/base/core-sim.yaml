@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: core-sim
-        image: ghcr.io/vino9org/core-sim-3:develop-20240709-203514-d18f0da # {"$imagepolicy": "vinobank-dev:core-sim"}
+        image: ghcr.io/vino9org/core-sim-3:develop-20240709-212916-813822a # {"$imagepolicy": "vinobank-dev:core-sim"}
         ports:
         - containerPort: 5000
         env:
@@ -24,12 +24,12 @@ spec:
         - name: WORKERS
           value: "1"
       resources:
-          requests:
-            memory: "512Mi"
-            cpu: "0.5"
-          limits:
-            memory: "1Gi"
-            cpu: "1"
+        requests:
+          memory: "512Mi"
+          cpu: "0.5"
+        limits:
+          memory: "1Gi"
+          cpu: "1"
 ---
 apiVersion: v1
 kind: Service
