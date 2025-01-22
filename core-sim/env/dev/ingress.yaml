@@ -5,7 +5,7 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-    - /vinobank/core
+    - /dev/core
     forceSlash: false
 
 ---
@@ -21,7 +21,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /vinobank/core
+      - path: /dev/core
         pathType: Prefix
         backend:
           service:

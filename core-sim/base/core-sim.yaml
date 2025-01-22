@@ -15,12 +15,21 @@ spec:
     spec:
       containers:
       - name: core-sim
-        image: ghcr.io/vino9org/core_sim:develop-20240615-163248-a933d0b # {"$imagepolicy": "vinobank:core-sim-develop"}
+        image: ghcr.io/vino9org/core-sim-3:develop-20240709-212916-813822a # {"$imagepolicy": "vinobank-dev:core-sim"}
         ports:
-        - containerPort: 8000
+        - containerPort: 5000
         env:
         - name: DATABASE_URL
-          value: postgres://vinocore:vinocore@vino-core.c4bdt5vbjo45.us-west-2.rds.amazonaws.com:5432/vinocore
+          value: asyncpg://vinocore:vinocore@10.0.28.32:5432/vinocore
+        - name: WORKERS
+          value: "1"
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "0.5"
+        limits:
+          memory: "1Gi"
+          cpu: "1"
 ---
 apiVersion: v1
 kind: Service
@@ -32,4 +41,4 @@ spec:
     svc: core-sim
   ports:
   - name: http
-    port: 8000
+    port: 5000

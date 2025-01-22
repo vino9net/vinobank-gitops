@@ -14,43 +14,43 @@ spec:
         svc: core-banking-sim
     spec:
       containers:
-      - name: core-banking-sim
-        image: ghcr.io/vino9org/core-banking-sim:develop-20231023-131551-06486b4 # {"$imagepolicy": "vinobank-dev:core-banking-sim-develop"}
-        ports:
-        - containerPort: 8000
-        env:
-        - name: REDIS_OM_URL
-          value: redis://redis:6379/0
-        - name: EVENT_SINK_TYPE
-          value: NONE
-        - name: BYPASS
-          value: "0"
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: aws-credential
-              key: aws_access_key_id
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: aws-credential
-              key: aws_secret_access_key
-        - name: NEW_RELIC_APP_NAME
-          value: core-banking-sim
-        - name: NEW_RELIC_LICENSE_KEY
-          valueFrom:
-            secretKeyRef:
-              name: newrelic-license-key
-              namespace: infra
-              key: ingestion.key
-              optional: true
-        volumeMounts:
-        - name: newrelic-ini
-          mountPath: /etc/config
+        - name: core-banking-sim
+          image: ghcr.io/vino9org/core-banking-sim:develop-20240319-124609-19e4d53 # {"$imagepolicy": "vinobank-dev:core-banking-sim-develop"}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: REDIS_OM_URL
+              value: redis://redis:6379/0
+            - name: EVENT_SINK_TYPE
+              value: NONE
+            - name: BYPASS
+              value: "0"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credential
+                  key: aws_access_key_id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credential
+                  key: aws_secret_access_key
+            - name: NEW_RELIC_APP_NAME
+              value: core-banking-sim
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: newrelic-license-key
+                  namespace: infra
+                  key: ingestion.key
+                  optional: true
+          volumeMounts:
+            - name: newrelic-ini
+              mountPath: /etc/config
       volumes:
-      - name: newrelic-ini
-        configMap:
-          name: newrelic-ini
+        - name: newrelic-ini
+          configMap:
+            name: newrelic-ini
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -68,22 +68,22 @@ spec:
         svc: core-banking-sim
     spec:
       containers:
-      - name: core-banking-sim-j
-        image: ghcr.io/vino9org/core-banking-sim-j:develop-20230608-101636-885e8b1 # {"$imagepolicy": "vinobank-dev:core-banking-sim-j-develop"}
-        ports:
-        - containerPort: 8000
-        env:
-        - name: SPRING_REDIS_HOST
-          value: redis
-        - name: NEW_RELIC_APP_NAME
-          value: vinobank/corebanking-sim-j
-        - name: NEW_RELIC_LICENSE_KEY
-          valueFrom:
-            secretKeyRef:
-              name: newrelic-license-key
-              namespace: infra
-              key: ingestion.key
-              optional: true
+        - name: core-banking-sim-j
+          image: ghcr.io/vino9org/core-banking-sim-j:develop-20230608-101636-885e8b1 # {"$imagepolicy": "vinobank-dev:core-banking-sim-j-develop"}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SPRING_REDIS_HOST
+              value: redis
+            - name: NEW_RELIC_APP_NAME
+              value: vinobank/corebanking-sim-j
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: newrelic-license-key
+                  namespace: infra
+                  key: ingestion.key
+                  optional: true
 ---
 apiVersion: v1
 kind: Service
@@ -94,5 +94,5 @@ spec:
   selector:
     svc: core-banking-sim
   ports:
-  - name: http
-    port: 8000
+    - name: http
+      port: 8000

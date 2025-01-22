@@ -2,9 +2,9 @@ kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 
 resources:
-- ../../base
-- ingress.yaml
-- image-policy.yaml
+  - ../../base
+  - ingress.yaml
+  - image-update.yaml
 
 namespace: vinobank-dev
 
@@ -12,11 +12,9 @@ generatorOptions:
   disableNameSuffixHash: true
 
 configMapGenerator:
-- name: newrelic-ini
-  files:
-  - newrelic.ini
-- name: redis-config
-  files:
-  - redis.conf
-
-
+  - name: newrelic-ini
+    files:
+      - newrelic.ini
+  - name: redis-config
+    files:
+      - redis.conf
