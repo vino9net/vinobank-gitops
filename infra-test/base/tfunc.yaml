@@ -21,11 +21,11 @@ spec:
           command: ["/bin/sleep", "infinity"]
           env:
             - name: DATABASE_URL
-              optional: true
               valueFrom:
                 secretKeyRef:
                   name: db-secret
                   key: uri
+                  optional: true
           volumeMounts:
             - name: test-postgres-app
               mountPath: /secrets/database_url
