@@ -6,14 +6,26 @@ metadata:
 type: Opaque
 stringData:
   password: secret
+
 ---
-apiVersion: redis.redis.opstreelabs.in/v1beta1
+apiVersion: redis.redis.opstreelabs.in/v1beta2
 kind: Redis
 metadata:
-  name: redis-single
+  name: redis-standalone
 spec:
   kubernetesConfig:
-    image: quay.io/opstree/redis:v7.0.11
-  clusterSize: 1
-  redisSecret:
-    name: redis-auth
+    image: redis:7.4
+    redisSecret:
+      name: redis-auth
+      key: password
+  storage:
+    volumeClaimTemplate:
+      spec:
+        # storageClassName: longhorn
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+  podSecurityContext:
+    runAsUser: 1000
+    fsGroup: 1000
