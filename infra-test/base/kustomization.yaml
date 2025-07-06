@@ -6,3 +6,4 @@ resources:
   - postgres.yaml
   - alpine-linux.yaml
   - tfunc.yaml
+  - tfunc-knative.yaml
