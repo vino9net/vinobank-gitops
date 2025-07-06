@@ -17,7 +17,7 @@ spec:
         - name: ghcr-cred
       containers:
         - name: tfunc
-          image: ghcr.io/sloppycoder/tfunc:main-20250706-195719-a868c8f # {"$imagepolicy": "test:tfunc-main"}
+          image: ghcr.io/sloppycoder/tfunc:main-20250706-214214-bf4579a # {"$imagepolicy": "test:tfunc-main"}
           env:
             - name: DATABASE_URL
               valueFrom:
