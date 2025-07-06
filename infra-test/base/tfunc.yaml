@@ -24,6 +24,7 @@ spec:
               mountPath: /secrets/database_url
               subPath: uri
               readOnly: true
+              optional: true
       volumes:
         - name: test-postgres-app
           secret:
