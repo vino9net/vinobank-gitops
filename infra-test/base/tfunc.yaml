@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: tfunc
-          image: ghcr.io/sloppycoder/tfunc:main-20250707-001838-f5bd6bc # {"$imagepolicy": "test:tfunc-main"}
+          image: ghcr.io/sloppycoder/tfunc:main-20250707-012814-acf9760 # {"$imagepolicy": "test:tfunc-main"}
           volumeMounts:
             - name: db-secret
               mountPath: /secrets/database_url
