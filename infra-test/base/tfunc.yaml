@@ -13,21 +13,16 @@ spec:
       labels:
         app: tfunc
     spec:
-      imagePullSecrets:
-        - name: ghcr-cred
       containers:
         - name: tfunc
-          image: ghcr.io/sloppycoder/tfunc:main-20250706-233620-4e92580 # {"$imagepolicy": "test:tfunc-main"}
-          command:
-            - /bin/sh
-            - -c
-            - |
-              sleep infinity
+          image: ghcr.io/sloppycoder/tfunc:main-20250707-001342-d940f73 # {"$imagepolicy": "test:tfunc-main"}
           volumeMounts:
             - name: db-secret
               mountPath: /secrets/database_url
               subPath: uri
               readOnly: true
+      # imagePullSecrets:
+      #   - name: ghcr-cred
       volumes:
         - name: db-secret
           secret:
