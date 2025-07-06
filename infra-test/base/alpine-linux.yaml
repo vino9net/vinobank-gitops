@@ -6,7 +6,7 @@
 #
 # for postgres
 #
-#   psql -h test-postgres-rw
+#   psql -h test-postgres-rw -U app app
 #
 
 apiVersion: apps/v1
