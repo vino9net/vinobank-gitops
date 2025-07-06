@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-auth
+type: Opaque
+stringData:
+  password: secret
+---
+apiVersion: redis.redis.opstreelabs.in/v1beta1
+kind: Redis
+metadata:
+  name: redis-single
+spec:
+  kubernetesConfig:
+    image: quay.io/opstree/redis:v7.0.11
+  clusterSize: 1
+  redisSecret:
+    name: redis-auth
