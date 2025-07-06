@@ -28,3 +28,4 @@ spec:
         - name: db-secret
           secret:
             secretName: test-postgres-app
+            optional: true
