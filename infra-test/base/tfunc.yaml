@@ -27,3 +27,16 @@ spec:
         - name: db-secret
           secret:
             secretName: test-postgres-app
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tapp
+spec:
+  type: ClusterIP
+  selector:
+    app: tfunc
+  ports:
+    - name: http
+      port: 8000
