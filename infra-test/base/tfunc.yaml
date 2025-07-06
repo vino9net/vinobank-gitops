@@ -19,13 +19,6 @@ spec:
         - name: tfunc
           image: ghcr.io/sloppycoder/tfunc:main-20250706-214214-bf4579a # {"$imagepolicy": "test:tfunc-main"}
           command: ["/bin/sleep", "infinity"]
-          env:
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: db-secret
-                  key: uri
-                  optional: true
           volumeMounts:
             - name: test-postgres-app
               mountPath: /secrets/database_url
