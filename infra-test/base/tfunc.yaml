@@ -13,6 +13,8 @@ spec:
       labels:
         app: tfunc
     spec:
+      imagePullSecrets:
+        - name: ghcr-cred
       containers:
         - name: tfunc
           image: ghcr.io/sloppycoder/tfunc:main-20250706-195719-a868c8f # {"$imagepolicy": "test:tfunc-main"}
@@ -22,9 +24,12 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: uri
-      imagePullSecrets:
-        - name: ghcr-cred
+          volumeMounts:
+            - name: test-postgres-app
+              mountPath: /secrets/database_url
+              subPath: uri
+              readOnly: true
       volumes:
-        - name: db-secret
+        - name: test-postgres-app
           secret:
             secretName: test-postgres-app
