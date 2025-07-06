@@ -1,0 +1,51 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: app-infra-test
+  namespace: test
+spec:
+  suspend: false
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: vinobank-repo-dev
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: develop
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: "{{range .Updated.Images}}{{println .}}{{end}}"
+    push:
+      branch: develop
+  update:
+    path: ./infra-test
+    strategy: Setters
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: tfunc-image-repo
+spec:
+  image: ghcr.io/sloppycoder/tfunc
+  interval: 1m0s
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: tfunc-main
+spec:
+  imageRepositoryRef:
+    name: tfunc-image-repo
+  filterTags:
+    pattern: '^main-(?P<suffix>\d{8}\-\d{6}-[0-9a-f]{7})'
+    extract: "$suffix"
+  policy:
+    alphabetical:
+      order: asc
