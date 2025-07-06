@@ -14,5 +14,5 @@ metadata:
 spec:
   kubernetesConfig:
     image: quay.io/opstree/redis:v7.0.11
-  redisSecret:
-    name: redis-auth
+    redisSecret:
+      name: redis-auth
