@@ -20,12 +20,11 @@ spec:
           image: ghcr.io/sloppycoder/tfunc:main-20250706-214214-bf4579a # {"$imagepolicy": "test:tfunc-main"}
           command: ["/bin/sleep", "infinity"]
           volumeMounts:
-            - name: test-postgres-app
+            - name: db-secret
               mountPath: /secrets/database_url
               subPath: uri
               readOnly: true
-              optional: true
       volumes:
-        - name: test-postgres-app
+        - name: db-secret
           secret:
             secretName: test-postgres-app
