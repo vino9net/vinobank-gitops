@@ -21,8 +21,8 @@ spec:
               mountPath: /secrets/database_url
               subPath: uri
               readOnly: true
-      # imagePullSecrets:
-      #   - name: ghcr-cred
+      imagePullSecrets:
+        - name: ghcr-cred
       volumes:
         - name: db-secret
           secret:
