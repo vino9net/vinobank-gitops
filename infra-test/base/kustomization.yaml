@@ -3,5 +3,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 
 resources:
   - redis.yaml
-  # - postgres.yaml
+  - postgres.yaml
   - alpine-linux.yaml
