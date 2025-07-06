@@ -17,7 +17,7 @@ spec:
         - name: ghcr-cred
       containers:
         - name: tfunc
-          image: ghcr.io/sloppycoder/tfunc:main-20250706-230534-19ef0e6 # {"$imagepolicy": "test:tfunc-main"}
+          image: ghcr.io/sloppycoder/tfunc:main-20250706-233620-4e92580 # {"$imagepolicy": "test:tfunc-main"}
           command:
             - /bin/sh
             - -c
