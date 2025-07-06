@@ -1,4 +1,14 @@
 # for testing only
+#
+# for redis:
+#
+#   redis-cli -h redis-standalone
+#
+# for postgres
+#
+#   psql -h test-postgres-rw
+#
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,14 +29,15 @@ spec:
         - name: minimal-linux-container
           image: alpine:latest
           command:
-            [
-              "/bin/sh",
-              "-c",
-              "apk add --no-cache curl bash redis postgresql15-client && sleep infinity",
-            ]
+            - /bin/sh
+            - -c
+            - |
+              apk add --no-cache curl bash redis postgresql15-client
+              cp /secrets/.pgpass /.pgpass && chmod 0600 /.pgpass
+              sleep infinity
           env:
             - name: PGPASSFILE
-              value: /secrets/.pgpass
+              value: /.pgpass
           resources:
             limits:
               cpu: "100m"
