@@ -1,0 +1,30 @@
+# test application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tfunc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tfunc
+  template:
+    metadata:
+      labels:
+        app: tfunc
+    spec:
+      containers:
+        - name: tfunc
+          image: ghcr.io/sloppycoder/tfunc:main-20250706-195719-a868c8f # {"$imagepolicy": "test:tfunc-main"}
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: uri
+      imagePullSecrets:
+        - name: ghcr-cred
+      volumes:
+        - name: db-secret
+          secret:
+            secretName: test-postgres-app
