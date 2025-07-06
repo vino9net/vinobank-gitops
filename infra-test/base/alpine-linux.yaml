@@ -1,4 +1,14 @@
 # for testing only
+#
+# for redis:
+#
+#   redis-cli -h redis-standalone
+#
+# for postgres
+#
+#   psql -h test-postgres-rw -U app app
+#
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,13 +26,31 @@ spec:
         app: minimal-linux
     spec:
       containers:
-      - name: minimal-linux-container
-        image: alpine:latest  # Minimal Linux image
-        command: ["/bin/sh", "-c", "apk add --no-cache curl bash && sleep infinity"]
-        resources:
-          limits:
-            cpu: "100m"
-            memory: "128Mi"
-          requests:
-            cpu: "50m"
-            memory: "64Mi"
+        - name: minimal-linux-container
+          image: alpine:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              apk add --no-cache curl bash redis postgresql15-client
+              cp /secrets/.pgpass /.pgpass && chmod 0600 /.pgpass
+              sleep infinity
+          env:
+            - name: PGPASSFILE
+              value: /.pgpass
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+          volumeMounts:
+            - name: test-postgres-app
+              mountPath: /secrets/.pgpass
+              subPath: pgpass
+              readOnly: true
+      volumes:
+        - name: test-postgres-app
+          secret:
+            secretName: test-postgres-app
