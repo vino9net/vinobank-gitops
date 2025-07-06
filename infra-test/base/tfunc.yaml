@@ -18,8 +18,10 @@ spec:
       containers:
         - name: tfunc
           image: ghcr.io/sloppycoder/tfunc:main-20250706-214214-bf4579a # {"$imagepolicy": "test:tfunc-main"}
+          command: ["/bin/sleep", "infinity"]
           env:
             - name: DATABASE_URL
+              optional: true
               valueFrom:
                 secretKeyRef:
                   name: db-secret
