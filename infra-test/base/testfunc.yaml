@@ -1,3 +1,8 @@
+# deploy the container as a knative-serving service
+# can be triggered by:
+#
+#  curl -v $(kubectl get  ksvc testfunc -n test -o json | jq -r .status.url):8080/check
+#
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
@@ -20,3 +25,49 @@ spec:
                   key: uri
       imagePullSecrets:
         - name: ghcr-cred
+
+---
+# the following broker and trigger are for demostrating
+# trigger the above function using a message send to the broker
+# since the broker is not configured to be accessed from outside
+# the cluster, the following command should be run inside a pod,
+# e.g. the minimal linux pod in the same namespace
+#
+# curl -v http://broker-ingress.knative-eventing.svc.cluster.local/test/default \
+#   -X POST \
+#   -H "Ce-Id: test-$(date +%s)" \
+#   -H "Ce-Source: test/testfunc" \
+#   -H "Ce-Type: dev.vino9.infra.test.infra.ping" \
+#   -H "Ce-Specversion: 1.0" \
+#   -H "Content-Type: application/json" \
+#   -d '{"message": "Hello from trigger test", "data": "some test data"}'
+#
+# if everything works corretly, a new pod will be started and its log should
+# say it has recieved a POST
+#
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default
+  annotations:
+    # Note: you can set the eventing.knative.dev/broker.class annotation to change the class of the broker.
+    # The default broker class is MTChannelBasedBroker, but Knative also supports use of the other class.
+    eventing.knative.dev/broker.class: MTChannelBasedBroker
+spec: {}
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: testfunc-eventing
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.vino9.infra.test.infra.ping
+      source: test/testfunc
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: testfunc
