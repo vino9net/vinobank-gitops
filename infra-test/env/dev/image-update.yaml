@@ -30,9 +30,9 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
-  name: tfunc-image-repo
+  name: testfunc-image-repo
 spec:
-  image: ghcr.io/sloppycoder/tfunc
+  image: ghcr.io/sloppycoder/testfunc
   interval: 1m0s
 
 ---
@@ -42,7 +42,7 @@ metadata:
   name: tfunc-main
 spec:
   imageRepositoryRef:
-    name: tfunc-image-repo
+    name: testfunc-image-repo
   filterTags:
     pattern: '^main-(?P<suffix>\d{8}\-\d{6}-[0-9a-f]{7})'
     extract: "$suffix"
