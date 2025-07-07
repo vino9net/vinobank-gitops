@@ -10,14 +10,11 @@ spec:
           image: ghcr.io/sloppycoder/testfunc:main-20250707-195454-8d8ae36 # {"$imagepolicy": "test:testfunc-main"}
           ports:
             - containerPort: 8080
-          volumeMounts:
-            - name: db-secret
-              mountPath: /secrets/database_url
-              subPath: uri
-              readOnly: true
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: test-postgres-app
+                  key: uri
       imagePullSecrets:
         - name: ghcr-cred
-      volumes:
-        - name: db-secret
-          secret:
-            secretName: test-postgres-app
