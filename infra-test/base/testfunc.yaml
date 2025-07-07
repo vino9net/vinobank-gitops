@@ -11,8 +11,8 @@ spec:
   template:
     spec:
       containers:
-        - name: testfunc
-          image: ghcr.io/sloppycoder/testfunc:main-20250707-210819-429b214 # {"$imagepolicy": "test:testfunc-main"}
+        - name: tfunc
+          image: ghcr.io/sloppycoder/testfunc:main-20250707-214153-accfe29 # {"$imagepolicy": "test:testfunc-main"}
           ports:
             - containerPort: 8080
           env:
