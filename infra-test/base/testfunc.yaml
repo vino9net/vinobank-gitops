@@ -11,6 +11,8 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: REDIS_SVC
+              value: redis-standalone
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
