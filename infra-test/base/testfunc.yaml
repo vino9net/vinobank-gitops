@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-        - name: tfunc
+        - name: testfunc
           image: ghcr.io/sloppycoder/testfunc:main-20250707-210819-429b214 # {"$imagepolicy": "test:testfunc-main"}
           ports:
             - containerPort: 8080
