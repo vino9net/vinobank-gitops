@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: tfunc
-          image: ghcr.io/sloppycoder/testfunc:main-20250707-192401-9bf6ef7 # {"$imagepolicy": "test:tfunc-main"}
+          image: ghcr.io/sloppycoder/testfunc:main-20250707-193617-7d62636 # {"$imagepolicy": "test:tfunc-main"}
           ports:
             - containerPort: 8080
           volumeMounts:
