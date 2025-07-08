@@ -9,6 +9,11 @@ metadata:
   name: testfunc
 spec:
   template:
+    metadata:
+      labels:
+        # the following label is required and used by
+        # network policy to direct ingress into the pod
+        local.dev/pod-type: app
     spec:
       containers:
         - name: tfunc
