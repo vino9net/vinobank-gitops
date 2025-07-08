@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: tfunc
-          image: ghcr.io/sloppycoder/testfunc:main-20250707-214153-accfe29 # {"$imagepolicy": "test:testfunc-main"}
+          image: ghcr.io/sloppycoder/testfunc:main-20250708-013602-705da03 # {"$imagepolicy": "test:testfunc-main"}
           ports:
             - containerPort: 8080
           env:
@@ -30,7 +30,6 @@ spec:
                   key: uri
       imagePullSecrets:
         - name: ghcr-cred
-
 ---
 # the following broker and trigger are for demostrating
 # trigger the above function using a message send to the broker
@@ -59,7 +58,6 @@ metadata:
     # The default broker class is MTChannelBasedBroker, but Knative also supports use of the other class.
     eventing.knative.dev/broker.class: MTChannelBasedBroker
 spec: {}
-
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
